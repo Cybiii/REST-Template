@@ -4,7 +4,9 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
+
+import router from "./router";
 
 const app = express();
 
@@ -25,8 +27,11 @@ server.listen(8080, () => {
 });
 
 const MONGO_URL =
-  "mongodb+srv://sebastian:<R55zLd3KDBN4oERn>@cluster0.jhoduti.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://sebastian:HBhVaY1HAViEvgFR@cluster0.j4bdm86.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on("error", (error: Error) => console.log(error));
+
+app.use("/", router());
+
